@@ -1,136 +1,140 @@
 # Mini CAD System
 
-Python ve Tkinter ile geliştirilmiş, 2D çizim ve 3D render yeteneklerine sahip hafif bir masaüstü CAD uygulaması.
+A lightweight desktop CAD application developed with Python and Tkinter, featuring 2D drawing and 3D rendering capabilities.
+
+![Application Screenshot](images/app1.png)
+![Application Screenshot](images/app2.png)
+![Application Screenshot](images/app3.png)
 
 ---
 
-## Özellikler
+## Features
 
-### 2D Çizim Araçları
-- **Çizgi** — serbest doğru çizimi
-- **Dikdörtgen** — köşeden köşeye çizim
-- **Üçgen** — üçgen çokgen oluşturma
-- **Daire** — elips / daire çizimi (36 noktalı çokgen yaklaşımı)
+### 2D Drawing Tools
+- **Line** — freehand line drawing
+- **Rectangle** — vertex-to-vertex drawing
+- **Triangle** — creating triangular polygons
+- **Circle** — drawing ellipses/circles (36-point polygon approximation)
 
-### 3D Nesneler
-- **Küp** — 6 yüzlü, ışıklandırmalı küp
-- **Piramit** — 5 yüzlü piramit
-- Nesneler başlangıçta izometrik açıda yerleştirilir; fare sürüklemesiyle boyut ayarlanır
-- Tüm 3D yüzler **Painter's Algorithm** ile Z sırasına göre çizilir
-- Sağ fare tuşu + sürükle → **küresel 3D kamera rotasyonu**
+### 3D Objects
+- **Cube** — hexagonal, illuminated cube
+- **Pyramid** — pentagonal pyramid
+- Objects are initially placed at an isometric angle; Size adjustment via mouse drag
+- All 3D faces are drawn in Z order with **Painter's Algorithm**
+- Right mouse button + drag → **global 3D camera rotation**
 
-### Seçim ve Düzenleme
-- Nesneleri seçip tutuşlarla **yeniden boyutlandırma** (köşe handles)
-- Seçili nesneyi **sürükleyerek taşıma**
-- **Z ekseni rotasyonu** (2D ve 3D): ±15° adımlarla
-- **3D nesne rotasyonu**: X ve Y eksenleri ayrı ayrı
-- **Ölçek**: %20 büyütme / %20 küçültme
-- **Katman yönetimi**: Öne getir / Arkaya gönder
-- **Kopyala** — seçili nesneyi ofsetli konumda çoğaltır
-- **Sil** — seçili nesneyi kaldırır
+### Selection and Editing
+- **Resizing** objects by selecting and holding (corner handles)
+- **Drag and move** the selected object
+- **Z-axis rotation** (2D and 3D): in ±15° increments
+- **3D object rotation**: X and Y axes separately
+- **Scale**: 20% magnification / 20% reduction
+- **Layer management**: Bring to front / Send to back
+- **Copy** — duplicates the selected object in offset position
+- **Delete** — removes the selected object
 
-### Görünüm ve Stil
-- Renk seçici (Tkinter `colorchooser`)
-- Kenarlık kalınlığı (1 / 2 / 3 / 5 / 8 / 10 px)
-- **Dolu / Kenarlık** stili arasında geçiş
-- Özelleştirilebilir ızgara (görünür / gizli)
-- **Izgaraya yapış (snap)** modu
+### Appearance and Style
+- Color picker (Tkinter `colorchooser`)
+- Border thickness (1 / 2 / 3 / 5 / 8 / 10 px)
+- Switching between **Filled / Border** style
+- Customizable grid (visible / hidden)
+- **Snap to grid** mode
 
-### Geçmiş ve Dosya
-- **Geri Al / İleri Al** — 30 adıma kadar geçmiş
-- **Kaydet / Yükle** — tüm çizim `.json` formatında saklanır
+### History and File
+- **Undo / Redo** — History up to 30 steps
+- **Save / Load** — all drawings are saved in `.json` format
 
 ---
 
-## Dosya Yapısı
+## File Structure
 
 ```
 .
-├── main.py        # Ana uygulama — MiniCADApp sınıfı, UI kurulumu, tüm olay yönetimi
-├── config.py      # Renk paleti (COLORS) ve font tanımlamaları (FONTS)
-├── math_3d.py     # 3D matematik yardımcıları: normalize, cross/dot product, shade_color
-└── ui_utils.py    # Tkinter widget yardımcıları: make_btn, add_hover, sep
+├── main.py # Main application — MiniCADApp class, UI setup, all event management
+├── config.py # Color palette (COLORS) and font definitions (FONTS)
+├── math_3d.py # 3D math helpers: normalize, cross/dot product, shade_color
+└── ui_utils.py # Tkinter widget helpers: make_btn, add_hover, sep
 ```
 
-### Modül Sorumlulukları
+### Module Responsibilities
 
-| Dosya | Sorumluluk |
+| File | Responsibility |
 |---|---|
-| `main.py` | Uygulama durumu, olay döngüsü, çizim ve render mantığı |
-| `config.py` | Merkezi renk ve font sabitleri |
-| `math_3d.py` | Vektör işlemleri ve yüzey gölgelendirme hesaplamaları |
-| `ui_utils.py` | Tekrar kullanılabilir buton / ayırıcı oluşturma fonksiyonları |
+| `main.py` | Application state, event loop, drawing and rendering logic |
+| `config.py` | Centralized color and font constants |
+| `math_3d.py` | Vector operations and surface shading calculations |
+| `ui_utils.py` | Reusable button/separator creation functions |
 
 ---
 
-## Gereksinimler
+## Requirements
 
 - Python 3.8+
-- Tkinter (Python'un standart kütüphanesiyle gelir; ayrıca kurulum gerekmez)
 
-> **Not:** Bazı Linux dağıtımlarında Tkinter ayrıca kurulabilir:
+- Tkinter (Comes with Python's standard library; no additional installation required)
+
+> **Note:** Tkinter may need to be installed separately on some Linux distributions:
 > ```bash
 > sudo apt install python3-tk
 > ```
 
 ---
 
-## Çalıştırma
+## Running
 
 ```bash
 python main.py
 ```
 
-Uygulama 1450×880 piksel boyutunda açılır.
+The application opens at 1450x880 pixels.
 
 ---
 
-## Klavye Kısayolları
+## Keyboard Shortcuts
 
-| Kısayol | İşlev |
+| Shortcut | Function |
 |---|---|
-| `Ctrl+C` | Seçili nesneyi kopyala |
-| `Ctrl+Z` | Geri al |
-| `Ctrl+Y` | İleri al |
-| `Delete` | Seçili nesneyi sil |
+| `Ctrl+C` | Copy selected object |
+| `Ctrl+Z` | Undo |
+| `Ctrl+Y` | Redo |
+| `Delete` | Delete selected object |
 
 ---
 
-## Kayıt Formatı
+## Save Format
 
-Çizimler JSON olarak kaydedilir. Format:
+Drawings are saved as JSON. Format:
 
 ```json
-{
-  "2d": [
-    {
-      "type": "polygon",
-      "coords": [100, 100, 200, 100, 200, 200, 100, 200],
-      "fill": "#3b82f6",
-      "outline": "#3b82f6",
-      "width": "2"
-    }
-  ],
-  "3d": [
-    {
-      "id": "3d_0_1",
-      "type": "cube",
-      "cx": 400, "cy": 300, "size": 60,
-      "rot_x": -0.6155, "rot_y": 0.7854, "rot_z": 0.0,
-      "color": "#f97316",
-      "style": "fill",
-      "width": 2,
-      "vertices": [...],
-      "faces": [...]
-    }
-  ]
+{ 
+"2d":[ 
+{ 
+"type": "polygon", 
+"coords": [100, 100, 200, 100, 200, 200, 100, 200], 
+"fill": "#3b82f6", 
+"outline": "#3b82f6", 
+"width": "2" 
+} 
+], 
+"3d":[ 
+{ 
+"id": "3d_0_1", 
+"type": "cube", 
+"cx": 400, "cy": 300, "size": 60, 
+"rot_x": -0.6155, "rot_y": 0.7854, "rot_z": 0.0, 
+"color": "#f97316", 
+"style": "fill",
+"width": 2,
+"vertices": [...],
+"faces": [...]
+}
+]
 }
 ```
 
 ---
 
-## Mimari Notlar
+## Architectural Notes
 
-- **3D Render:** Her frame'de tüm 3D nesneler sıfırdan yeniden çizilir. Nesne rotasyonu + global kamera rotasyonu zincir matris dönüşümleri ile uygulanır. Yüzey görünürlüğü backface culling (normal Z > 0) ile belirlenir; gölgelendirme diffuse ışık hesabına dayanır.
-- **Geçmiş Yönetimi:** Her değiştirici işlemden önce `save_state()` çağrılarak o anki 2D canvas durumu ve 3D nesne listesi `history` yığınına eklenir. Maksimum 30 adım saklanır.
-- **Izgara Yapışması:** `get_snapped_coord()` tüm fare koordinatlarını `grid_size` katına yuvarlar.
+- **3D Rendering:** All 3D objects are redrawn from scratch in each frame. Object rotation + global camera rotation are implemented using chain matrix transformations. Surface visibility is determined by backface culling (normal Z > 0); shading is based on diffuse light calculation.
+- **History Management:** Before each modifier operation, the current 2D canvas state and 3D object list are added to the `history` stack by calling `save_state()`. A maximum of 30 steps are saved. - **Grid Snapping:** `get_snapped_coord()` rounds all mouse coordinates to the `grid_size` factor.
