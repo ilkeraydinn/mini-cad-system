@@ -5,7 +5,6 @@ import json
 import math
 import copy
 
-# Kendi yazdığımız modülleri dahil ediyoruz
 from config import COLORS, FONTS
 import math_3d
 import ui_utils
@@ -14,7 +13,7 @@ class MiniCADApp:
     def __init__(self, root):
         self.root = root
         self.root.title("Mini CAD System")
-        self.root.geometry("1450x880")
+        self.root.geometry("800x600")
         self.root.configure(bg=COLORS["bg"])
 
         # --- UYGULAMA DURUM DEĞİŞKENLERİ ---
